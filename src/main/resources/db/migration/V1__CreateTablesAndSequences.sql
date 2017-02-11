@@ -1,0 +1,40 @@
+-- TABLES
+CREATE TABLE "user"
+(
+    id BIGINT NOT NULL,
+    login VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE public.user_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    CACHE 1;
+
+ALTER SEQUENCE public.user_seq
+    OWNER TO postgres;
+
+
+CREATE TABLE topic
+(
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    creation_date TIMESTAMP NOT NULL,
+    send_date TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE public.topic_seq
+INCREMENT 1
+START 1
+MINVALUE 1
+MAXVALUE 999999999
+CACHE 1;
+
+ALTER SEQUENCE public.topic_seq
+OWNER TO postgres;
