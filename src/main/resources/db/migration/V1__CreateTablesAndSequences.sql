@@ -38,3 +38,31 @@ CACHE 1;
 
 ALTER SEQUENCE public.topic_seq
 OWNER TO postgres;
+
+
+CREATE TABLE subscription
+(
+    id BIGINT NOT NULL,
+    topic_id VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (topic_id) REFERENCES topic(id)
+);
+
+CREATE SEQUENCE public.subscription_seq
+INCREMENT 1
+START 1
+MINVALUE 1
+MAXVALUE 999999999
+CACHE 1;
+
+ALTER SEQUENCE public.subscription_seq
+OWNER TO postgres;
+
+CREATE TABLE subscription_user
+(
+    subscription_id BIGINT,
+    user_id BIGINT,
+    PRIMARY KEY (subscription_id, user_id),
+    FOREIGN KEY (subscription_id) REFERENCES subscription(id),
+    FOREIGN KEY (user_id) REFERENCES "user"(id)
+);

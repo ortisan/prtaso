@@ -4,6 +4,8 @@
         <jta-data-source>java:/prtasoDS</jta-data-source>
 
         <class>br.com.ortiz.domain.entity.User</class>
+        <class>br.com.ortiz.domain.entity.Topic</class>
+        <class>br.com.ortiz.domain.entity.Subscription</class>
 
         <properties>
             <!--<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
