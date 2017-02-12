@@ -43,7 +43,7 @@ OWNER TO postgres;
 CREATE TABLE subscription
 (
     id BIGINT NOT NULL,
-    topic_id VARCHAR(255) NOT NULL,
+    topic_id BIGINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (topic_id) REFERENCES topic(id)
 );
