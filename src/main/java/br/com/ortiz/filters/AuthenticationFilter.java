@@ -29,7 +29,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256("aloha")).build();
             DecodedJWT verify = verifier.verify(token);
-            requestContext.setProperty("user_name", verify.getClaim("user_name"));
+            requestContext.setProperty("username", verify.getClaim("username"));
             requestContext.setProperty("user_id", verify.getClaim("user_id"));
 
         } catch (Exception exc) {

@@ -1,5 +1,6 @@
 package br.com.ortiz.service.ws;
 
+import br.com.ortiz.annotations.Secured;
 import br.com.ortiz.business.ejb.TopicService;
 import br.com.ortiz.domain.entity.Topic;
 
@@ -10,11 +11,13 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by marcelo on 09/02/17.
  */
+@Secured
 @Path("/topic")
 public class TopicWs {
 
     @Inject
     private TopicService topicService;
+
 
     @Path("/{id}")
     @GET
