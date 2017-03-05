@@ -1,7 +1,5 @@
 package br.com.ortiz.business.ejb;
 
-import br.com.ortiz.domain.dao.GenericDao;
-import br.com.ortiz.domain.dao.TopicDao;
 import br.com.ortiz.domain.dao.UserDao;
 import br.com.ortiz.domain.entity.User;
 

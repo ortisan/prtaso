@@ -15,12 +15,14 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by marcelo on 09/02/17.
  */
-@Path("/login")
-public class LoginWs {
+@Path("/signin")
+public class SigninWs {
 
     @Inject
     private UserService userService;
@@ -42,7 +44,9 @@ public class LoginWs {
             }
         }
 
-        Response response = Response.ok(token).header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token)).build();
-        return response;
+
+        Map<String, String> objResponse = new HashMap<>();
+        objResponse.put("token", token);
+        return Response.ok(objResponse, MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token)).build();
     }
 }
