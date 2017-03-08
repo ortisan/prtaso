@@ -31,22 +31,17 @@ public class SigninWs {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
-    public Response login(LoginTo loginTo) {
-        String token = null;
+    public Response login(LoginTo loginTo) throws UnsupportedEncodingException {
 
         User userLoaded = userService.findByUserName(loginTo.getUsername());
 
+        String token = null;
         if (userLoaded != null && loginTo.getPassword().equals(userLoaded.getPassword())) {
-            try {
-                token = JWT.create().withClaim("user_id", userLoaded.getId().toString()).withClaim("username", userLoaded.getUsername()).sign(Algorithm.HMAC256("aloha"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            token = userService.createToken(userLoaded);
         }
-
 
         Map<String, String> objResponse = new HashMap<>();
         objResponse.put("token", token);
-        return Response.ok(objResponse, MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", token)).build();
+        return Response.ok(objResponse, MediaType.APPLICATION_JSON).build();
     }
 }

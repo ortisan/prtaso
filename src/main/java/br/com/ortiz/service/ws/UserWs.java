@@ -2,10 +2,12 @@ package br.com.ortiz.service.ws;
 
 import br.com.ortiz.business.ejb.UserService;
 import br.com.ortiz.domain.entity.User;
+import br.com.ortiz.domain.entity.UserToken;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -27,9 +29,15 @@ public class UserWs {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
-    public User save(User user) {
+    public UserToken save(User user) throws UnsupportedEncodingException {
         userService.save(user);
-        return user;
+        String token = userService.createToken(user);
+        UserToken userToken = new UserToken();
+        userToken.setId(user.getId());
+        userToken.setName(user.getName());
+        userToken.setUsername(user.getUsername());
+        userToken.setToken(token);
+        return userToken;
     }
 
 }
