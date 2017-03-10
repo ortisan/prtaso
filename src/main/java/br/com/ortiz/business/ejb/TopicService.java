@@ -7,6 +7,7 @@ import br.com.ortiz.domain.entity.Topic;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -23,6 +24,12 @@ public class TopicService {
 
     public Topic update(Topic topic) {
         return topicDao.update(topic);
+    }
+
+
+    public List<Topic> findAll() {
+        // TODO FILTER NON EXPIRED
+        return topicDao.findAll();
     }
 
     public Topic findById(Long id) {

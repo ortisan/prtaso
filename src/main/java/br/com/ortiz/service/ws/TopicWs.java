@@ -7,6 +7,7 @@ import br.com.ortiz.domain.entity.Topic;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -17,6 +18,14 @@ public class TopicWs {
 
     @Inject
     private TopicService topicService;
+
+
+    @Path("/")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Topic> findAll() {
+        return topicService.findAll();
+    }
 
 
     @Path("/{id}")
