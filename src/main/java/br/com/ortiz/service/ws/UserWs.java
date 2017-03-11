@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by marcelo on 09/02/17.
  */
-@Path("/user")
+@Path("/users")
 public class UserWs {
 
     @Inject

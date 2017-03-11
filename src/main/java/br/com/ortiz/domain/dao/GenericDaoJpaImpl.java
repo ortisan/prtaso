@@ -11,7 +11,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
         implements GenericDao<T, PK> {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     protected Class<T> entityClass;
 
@@ -44,4 +44,5 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
                 .createQuery(String.format("Select obj from %s obj", entityClass.getSimpleName()), entityClass)
                 .getResultList();
     }
+
 }

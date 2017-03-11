@@ -27,12 +27,22 @@ data-source add --jndi-name=java:/prtasoDS --name=prtasoDS --connection-url=jdbc
 mvn flyway:migrate
 ```
 
-###Criar Usuário:
+##Usuários
 
-Post para http://localhost:8080/prtaso/api/user
+##Criar Usuário:
+
+Post para http://localhost:8080/prtaso/api/users
 
 ```sh
-curl --request POST --url http://localhost:8080/prtaso/api/user --header 'content-type: application/json' --data '{"name":"Marcelo Ortiz de Santana","username":"marcelo","password": "123456"}'
+curl --request POST --url http://localhost:8080/prtaso/api/users --header 'content-type: application/json' --data '{"name":"Marcelo Ortiz de Santana","username":"marcelo","password": "123456"}'
+```
+
+### Obter Usuários
+
+Get para http://localhost:8080/prtaso/api/users/:slug
+
+```sh
+curl --request GET --url http://localhost:8080/prtaso/api/users/1 --header 'content-type: application/json'
 ```
 
 ###Login:
@@ -43,14 +53,23 @@ Post para http://localhost:8080/prtaso/api/signin
 curl --request POST --url http://localhost:8080/prtaso/api/signin --header 'content-type: application/json' --data '{"username":"marcelo","password": "123456"}'  
 ```
 
-###Criação de tópicos:
+##Topicos
 
-Post para http://localhost:8080/prtaso/api/topic
+###Criar tópicos:
+
+Post para http://localhost:8080/prtaso/api/topics
 
 ```sh
 curl --request POST \
-  --url http://localhost:8080/prtaso/api/topic \
+  --url http://localhost:8080/prtaso/api/topics \
   --header 'content-type: application/json' \
   --data '{"name": "Teste", "message": "Mensagem teste", "sendDate":"2007-12-03T10:15:30.00Z"}'  
 ```
 
+### Obter Tópicos
+
+Get para http://localhost:8080/prtaso/api/topics
+
+```sh
+curl --request GET --url http://localhost:8080/prtaso/api/topics --header 'content-type: application/json'
+```

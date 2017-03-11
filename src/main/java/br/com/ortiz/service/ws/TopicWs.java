@@ -13,7 +13,7 @@ import java.util.List;
  * Created by marcelo on 09/02/17.
  */
 @Secured
-@Path("/topic")
+@Path("/topics")
 public class TopicWs {
 
     @Inject

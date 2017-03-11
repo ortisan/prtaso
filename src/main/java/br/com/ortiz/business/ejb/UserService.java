@@ -8,7 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -27,15 +27,18 @@ public class UserService {
         return userDao.find(id);
     }
 
-    public User findByUserName(String username) {
-        // TODO MAKES WITH CRITERIA
-        List<User> users = userDao.findAll();
-        User user = users.stream().filter(u -> username.equals(u.getUsername())).findFirst().get();
+    public Optional<User> findByUsernameAndPassword(String username, String password) {
+        Optional<User> user = userDao.findByUsernameAndPassword(username, password);
         return user;
     }
 
-    public String createToken(User user) throws UnsupportedEncodingException {
-        return JWT.create().withClaim("user_id", user.getId().toString()).withClaim("username", user.getUsername()).sign(Algorithm.HMAC256("aloha"));
+    public String createToken(User user) {
+        try {
+            return JWT.create().withClaim("user_id", user.getId().toString()).withClaim("username", user.getUsername()).sign(Algorithm.HMAC256("aloha"));
+        } catch (UnsupportedEncodingException e) {
+            // Never will throw this exception.
+            return "";
+        }
     }
 
 }
