@@ -37,7 +37,16 @@ Post para http://localhost:8080/prtaso/api/users
 curl --request POST --url http://localhost:8080/prtaso/api/users --header 'content-type: application/json' --data '{"name":"Marcelo Ortiz de Santana","username":"marcelo","password": "123456"}'
 ```
 
-### Obter Usuários
+### Obter Todos
+
+Get para http://localhost:8080/prtaso/api/users
+
+```sh
+curl --request GET --url http://localhost:8080/prtaso/api/users --header 'content-type: application/json'
+```
+
+
+### Por id
 
 Get para http://localhost:8080/prtaso/api/users/:slug
 

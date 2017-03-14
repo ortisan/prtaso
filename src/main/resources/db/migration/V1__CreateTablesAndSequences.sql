@@ -22,7 +22,7 @@ ALTER SEQUENCE public.user_seq
 CREATE TABLE topic
 (
     id BIGINT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
     message VARCHAR(255) NOT NULL,
     creation_date TIMESTAMP NOT NULL,
     send_date TIMESTAMP NOT NULL,

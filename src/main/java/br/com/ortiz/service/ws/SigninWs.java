@@ -4,6 +4,7 @@ import br.com.ortiz.business.ejb.UserService;
 import br.com.ortiz.domain.entity.User;
 import br.com.ortiz.service.ws.util.ResponseUtil;
 import br.com.ortiz.to.LoginTo;
+import br.com.ortiz.to.SignResultTo;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -36,9 +37,9 @@ public class SigninWs {
 
         return userOptional.map((User u) -> {
             String token = userService.createToken(u);
-            Map<String, String> objResponse = new HashMap<>();
-            objResponse.put("token", token);
-            return ResponseUtil.ok(objResponse);
+            SignResultTo signResult = new SignResultTo();
+            signResult.setToken(token);
+            return ResponseUtil.ok(signResult);
         }).orElse(ResponseUtil.unautorized());
     }
 }

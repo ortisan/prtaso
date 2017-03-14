@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -17,6 +18,13 @@ public class UserWs {
 
     @Inject
     private UserService userService;
+
+    @Path("/")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<User> findAll() {
+        return userService.findAll();
+    }
 
     @Path("/{id}")
     @GET

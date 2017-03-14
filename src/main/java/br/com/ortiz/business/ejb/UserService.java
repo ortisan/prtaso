@@ -8,6 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,6 +22,10 @@ public class UserService {
 
     public User save(User user) {
         return userDao.save(user);
+    }
+
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 
     public User findById(Long id) {
