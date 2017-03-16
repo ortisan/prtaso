@@ -38,6 +38,7 @@ public class SigninWs {
         return userOptional.map((User u) -> {
             String token = userService.createToken(u);
             SignResultTo signResult = new SignResultTo();
+            signResult.setUserId(u.getId());
             signResult.setToken(token);
             return ResponseUtil.ok(signResult);
         }).orElse(ResponseUtil.unautorized());

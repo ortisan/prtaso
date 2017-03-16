@@ -7,18 +7,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class SubscriptionTo {
-    private Long subscriptionId;
+    private Long id;
 
     private Long userId;
 
     private Long topicId;
 
-    public Long getSubscriptionId() {
-        return subscriptionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSubscriptionId(Long subscriptionId) {
-        this.subscriptionId = subscriptionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getUserId() {
@@ -40,7 +40,7 @@ public class SubscriptionTo {
     @Override
     public String toString() {
         return "SubscriptionTo{" +
-        "subscriptionId=" + subscriptionId +
+        "id=" + id +
         ", userId=" + userId +
         ", topicId=" + topicId +
         '}';
