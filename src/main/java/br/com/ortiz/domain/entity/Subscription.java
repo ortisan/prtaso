@@ -10,8 +10,8 @@ import java.util.List;
 @Table
 public class Subscription {
     @SequenceGenerator(
-            name = "subscription_sequence_generator",
-            sequenceName = "subscription_seq"
+    name = "subscription_sequence_generator",
+    sequenceName = "subscription_seq"
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subscription_sequence_generator")
@@ -19,9 +19,10 @@ public class Subscription {
     @OneToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private Topic topic;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "subscription_user", joinColumns = {@JoinColumn(name = "subscription_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
-    private List<User> users;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -39,11 +40,11 @@ public class Subscription {
         this.topic = topic;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

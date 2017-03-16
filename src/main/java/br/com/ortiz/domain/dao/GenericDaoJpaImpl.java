@@ -6,9 +6,10 @@ import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 
 public class GenericDaoJpaImpl<T, PK extends Serializable>
-        implements GenericDao<T, PK> {
+implements GenericDao<T, PK> {
 
     @PersistenceContext
     protected EntityManager entityManager;
@@ -17,7 +18,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
 
     public GenericDaoJpaImpl() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
-                .getGenericSuperclass();
+        .getGenericSuperclass();
         this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
@@ -26,8 +27,8 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
         return object;
     }
 
-    public T find(PK id) {
-        return this.entityManager.find(entityClass, id);
+    public Optional<T> find(PK id) {
+        return Optional.ofNullable(this.entityManager.find(entityClass, id));
     }
 
     public T update(T object) {
@@ -41,8 +42,8 @@ public class GenericDaoJpaImpl<T, PK extends Serializable>
 
     public List<T> findAll() {
         return entityManager
-                .createQuery(String.format("Select obj from %s obj", entityClass.getSimpleName()), entityClass)
-                .getResultList();
+        .createQuery(String.format("Select obj from %s obj", entityClass.getSimpleName()), entityClass)
+        .getResultList();
     }
 
 }

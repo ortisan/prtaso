@@ -4,10 +4,12 @@ import br.com.ortiz.domain.dao.GenericDao;
 import br.com.ortiz.domain.dao.TopicDao;
 import br.com.ortiz.domain.dao.UserDao;
 import br.com.ortiz.domain.entity.Topic;
+import jdk.nashorn.internal.runtime.options.Option;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -32,7 +34,7 @@ public class TopicService {
         return topicDao.findAll();
     }
 
-    public Topic findById(Long id) {
+    public Optional<Topic> findById(Long id) {
         return topicDao.find(id);
     }
 
