@@ -82,3 +82,10 @@ Get para http://localhost:8080/prtaso/api/topics
 ```sh
 curl --request GET --url http://localhost:8080/prtaso/api/topics --header 'content-type: application/json'
 ```
+
+## Recursos
+
+### [Fluxo de login do twitter](https://dev.twitter.com/web/sign-in/implementing)
+
+https://developers.facebook.com/docs/apis-and-sdks#third-party-sdks
+https://developers.facebook.com/docs/pages/publishing

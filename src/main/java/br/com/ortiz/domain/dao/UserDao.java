@@ -15,15 +15,15 @@ public class UserDao extends GenericDaoJpaImpl<User, Long> {
         TypedQuery<User> query = super.entityManager.createQuery("SELECT u FROM User AS u WHERE u.username = :username and u.password = :password", User.class);
         query.setParameter("username", username);
         query.setParameter("password", password);
-        List<User> user = query.getResultList();
-        return user.stream().findFirst();
+        List<User> users = query.getResultList();
+        return users.stream().findFirst();
     }
 
     public Optional<User> findByTwitterToken(String twitterToken) {
         TypedQuery<User> query = super.entityManager.createQuery("SELECT u FROM User AS u WHERE u.twitterToekn = :twitterToken", User.class);
         query.setParameter("twitterToken", twitterToken);
-        List<User> user = query.getResultList();
-        return user.stream().findFirst();
+        List<User> users = query.getResultList();
+        return users.stream().findFirst();
     }
 
 }

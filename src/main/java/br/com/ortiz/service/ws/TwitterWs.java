@@ -1,5 +1,6 @@
 package br.com.ortiz.service.ws;
 
+import br.com.ortiz.domain.entity.TwitterRequestToken;
 import br.com.ortiz.service.ejb.UserService;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * Created by tenta on 23/03/2017.
@@ -28,35 +30,33 @@ public class TwitterWs {
     @Inject
     private UserService userService;
 
-    @Path("/signin{twitterToken : ([a-zA-Z0-9]*)}")
+    @Path("/signin{twitterAccessToken : ([a-zA-Z0-9]*)}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response signIn(@PathParam("twitterToken") String twitterToken) throws TwitterException, MalformedURLException, URISyntaxException {
+    public Response signIn(@PathParam("twitterAccessToken") String twitterAccessToken) throws TwitterException, MalformedURLException, URISyntaxException {
         Twitter twitter = new TwitterFactory().getInstance();
         RequestToken requestToken = twitter.getOAuthRequestToken(CALLBACK_BACKEND_URL);
-        TwitterWs.requestToken = requestToken;
-        try {
-//            AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(requestToken);
-//            System.out.println("oAuthAccessToken = " + oAuthAccessToken);
-        } catch (Exception exc) {
-            // Não tem access token
-            return Response.temporaryRedirect(new URL(requestToken.getAuthorizationURL()).toURI()).build();
-        }
 
-        return Response.temporaryRedirect(new URL(requestToken.getAuthorizationURL()).toURI()).build();
+        userService.saveTwitterRequestRequestToken(requestToken);
+
+        return Response.temporaryRedirect(new URL(requestToken.getAuthenticationURL()).toURI()).build();
     }
 
     @Path("/callback")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     public Response callback(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) throws MalformedURLException, URISyntaxException {
-        System.out.println("oauthToken = " + oauthToken);
-        System.out.println("oauthVerifier = " + oauthVerifier);
-
-        Twitter twitter = new TwitterFactory().getInstance();
+        Optional<TwitterRequestToken> twitterRequestTokenByToken = userService.getTwitterRequestTokenByToken(oauthToken);
+        TwitterRequestToken twitterRequestToken = twitterRequestTokenByToken.get();
+        RequestToken requestToken = new RequestToken(twitterRequestToken.getRequestToken(), twitterRequestToken.getTokenSecret());
 
         try {
+            Twitter twitter = new TwitterFactory().getInstance();
+
             AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(requestToken, oauthVerifier);
+
+            // TODO VERIFY IF USER EXISTS, IF NOT, SAVE IT AND SHOW THE FORM FOR PERSONAL INFORMATIONS
+
             System.out.println("oAuthAccessToken.getScreenName() = " + oAuthAccessToken.getScreenName());
             System.out.println("oAuthAccessToken.getUserId() = " + oAuthAccessToken.getUserId());
             System.out.println("oAuthAccessToken.getToken() = " + oAuthAccessToken.getToken());
@@ -66,14 +66,6 @@ public class TwitterWs {
             e.printStackTrace();
         }
 
-        AccessToken oAuthAccessToken = null;
-//TODO VERIFY THIS FLOW
-        try {
-            oAuthAccessToken = twitter.getOAuthAccessToken(TwitterWs.requestToken);
-            oAuthAccessToken.getToken();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return Response.temporaryRedirect(new URL(String.format(CALLBACK_CLIENT_URL, "123456")).toURI()).build();
     }
 }

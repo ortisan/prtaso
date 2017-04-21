@@ -1,6 +1,8 @@
 package br.com.ortiz.service.ejb;
 
+import br.com.ortiz.domain.dao.TwitterRequestTokenDao;
 import br.com.ortiz.domain.dao.UserDao;
+import br.com.ortiz.domain.entity.TwitterRequestToken;
 import br.com.ortiz.domain.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -12,6 +14,8 @@ import twitter4j.auth.RequestToken;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.swing.text.html.Option;
+import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +28,9 @@ public class UserService {
 
     @Inject
     private UserDao userDao;
+
+    @Inject
+    private TwitterRequestTokenDao twitterRequestTokenDao;
 
     public User save(User user) {
         return userDao.save(user);
@@ -51,20 +58,15 @@ public class UserService {
         }
     }
 
-    public void signinTwitter(String twitterToken, String urlCallback) throws TwitterException {
-        Twitter twitter = TwitterFactory.getSingleton();
-        Optional<User> userOptional = userDao.findByTwitterToken(twitterToken);
-        RequestToken requestToken = null;
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            requestToken = new RequestToken(user.getTwitterToken(), user.getTwitterTokenSecret());
-            try {
-                AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(requestToken, user.getTwitterVerifier());
-            } catch (Exception exc) {
-                requestToken = twitter.getOAuthRequestToken(urlCallback);
-            }
-        } else {
-            requestToken = twitter.getOAuthRequestToken(urlCallback);
-        }
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public void saveTwitterRequestRequestToken(RequestToken requestToken) {
+        TwitterRequestToken twitterRequestToken = new TwitterRequestToken();
+        twitterRequestToken.setRequestToken(requestToken.getToken());
+        twitterRequestToken.setTokenSecret(requestToken.getTokenSecret());
+        twitterRequestTokenDao.save(twitterRequestToken);
+    }
+
+    public Optional<TwitterRequestToken> getTwitterRequestTokenByToken(String requestToken) {
+        return twitterRequestTokenDao.findByRequestToken(requestToken);
     }
 }
