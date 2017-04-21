@@ -1,6 +1,6 @@
 package br.com.ortiz.service.ws;
 
-import br.com.ortiz.business.ejb.UserService;
+import br.com.ortiz.service.ejb.UserService;
 import br.com.ortiz.domain.entity.User;
 import br.com.ortiz.service.ws.util.ResponseUtil;
 import br.com.ortiz.to.LoginTo;
@@ -14,8 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -41,6 +39,6 @@ public class SigninWs {
             signResult.setUserId(u.getId());
             signResult.setToken(token);
             return ResponseUtil.ok(signResult);
-        }).orElse(ResponseUtil.unautorized());
+        }).orElse(ResponseUtil.unauthorized());
     }
 }

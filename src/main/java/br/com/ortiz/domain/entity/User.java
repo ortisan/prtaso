@@ -10,9 +10,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "\"user\"")
 public class User {
+
     @SequenceGenerator(
-            name = "user_sequence_generator",
-            sequenceName = "user_seq"
+    name = "user_sequence_generator",
+    sequenceName = "user_seq"
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence_generator")
@@ -21,12 +22,24 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     private String username;
 
     // TODO ENCODE PASSWD
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "twitter_user_id")
+    private String twitterUserId;
+
+    @Column(name = "twitter_token")
+    private String twitterToken;
+
+    @Column(name = "twitter_token_secret")
+    private String twitterTokenSecret;
+
+    @Column(name = "twitter_verifier")
+    private String twitterVerifier;
 
     public Long getId() {
         return id;
@@ -58,5 +71,37 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTwitterUserId() {
+        return twitterUserId;
+    }
+
+    public void setTwitterUserId(String twitterUserId) {
+        this.twitterUserId = twitterUserId;
+    }
+
+    public String getTwitterToken() {
+        return twitterToken;
+    }
+
+    public void setTwitterToken(String twitterToken) {
+        this.twitterToken = twitterToken;
+    }
+
+    public String getTwitterTokenSecret() {
+        return twitterTokenSecret;
+    }
+
+    public void setTwitterTokenSecret(String twitterTokenSecret) {
+        this.twitterTokenSecret = twitterTokenSecret;
+    }
+
+    public String getTwitterVerifier() {
+        return twitterVerifier;
+    }
+
+    public void setTwitterVerifier(String twitterVerifier) {
+        this.twitterVerifier = twitterVerifier;
     }
 }

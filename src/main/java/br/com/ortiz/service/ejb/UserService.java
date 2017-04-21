@@ -1,9 +1,14 @@
-package br.com.ortiz.business.ejb;
+package br.com.ortiz.service.ejb;
 
 import br.com.ortiz.domain.dao.UserDao;
 import br.com.ortiz.domain.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -46,4 +51,20 @@ public class UserService {
         }
     }
 
+    public void signinTwitter(String twitterToken, String urlCallback) throws TwitterException {
+        Twitter twitter = TwitterFactory.getSingleton();
+        Optional<User> userOptional = userDao.findByTwitterToken(twitterToken);
+        RequestToken requestToken = null;
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            requestToken = new RequestToken(user.getTwitterToken(), user.getTwitterTokenSecret());
+            try {
+                AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(requestToken, user.getTwitterVerifier());
+            } catch (Exception exc) {
+                requestToken = twitter.getOAuthRequestToken(urlCallback);
+            }
+        } else {
+            requestToken = twitter.getOAuthRequestToken(urlCallback);
+        }
+    }
 }

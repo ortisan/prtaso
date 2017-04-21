@@ -1,4 +1,4 @@
-package br.com.ortiz.business.ejb;
+package br.com.ortiz.service.ejb;
 
 /**
  * Created by marcelo on 13/02/17.

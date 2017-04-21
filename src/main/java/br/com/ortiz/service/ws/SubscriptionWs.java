@@ -1,8 +1,8 @@
 package br.com.ortiz.service.ws;
 
-import br.com.ortiz.annotations.Secured;
-import br.com.ortiz.business.ejb.SubscriptionService;
+import br.com.ortiz.service.ejb.SubscriptionService;
 import br.com.ortiz.domain.entity.Subscription;
+import br.com.ortiz.security.annotation.Secured;
 import br.com.ortiz.to.SubscriptionTo;
 
 import javax.inject.Inject;

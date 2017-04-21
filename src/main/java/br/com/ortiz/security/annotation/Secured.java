@@ -1,4 +1,4 @@
-package br.com.ortiz.annotations;
+package br.com.ortiz.security.annotation;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;

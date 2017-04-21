@@ -1,10 +1,7 @@
-package br.com.ortiz.business.ejb;
+package br.com.ortiz.service.ejb;
 
-import br.com.ortiz.domain.dao.GenericDao;
 import br.com.ortiz.domain.dao.TopicDao;
-import br.com.ortiz.domain.dao.UserDao;
 import br.com.ortiz.domain.entity.Topic;
-import jdk.nashorn.internal.runtime.options.Option;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

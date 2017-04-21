@@ -1,4 +1,4 @@
-package br.com.ortiz.business.ejb;
+package br.com.ortiz.service.ejb;
 
 import br.com.ortiz.domain.dao.SubscriptionDao;
 import br.com.ortiz.domain.entity.Subscription;

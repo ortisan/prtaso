@@ -1,6 +1,6 @@
 package br.com.ortiz.service.ws;
 
-import br.com.ortiz.business.ejb.UserService;
+import br.com.ortiz.service.ejb.UserService;
 import br.com.ortiz.domain.entity.User;
 import br.com.ortiz.domain.entity.UserToken;
 import br.com.ortiz.service.ws.util.ResponseUtil;

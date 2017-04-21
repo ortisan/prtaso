@@ -1,6 +1,6 @@
-package br.com.ortiz.filters;
+package br.com.ortiz.security.filter;
 
-import br.com.ortiz.annotations.Secured;
+import br.com.ortiz.security.annotation.Secured;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;

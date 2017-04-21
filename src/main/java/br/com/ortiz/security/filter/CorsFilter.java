@@ -1,4 +1,4 @@
-package br.com.ortiz.filters;
+package br.com.ortiz.security.filter;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

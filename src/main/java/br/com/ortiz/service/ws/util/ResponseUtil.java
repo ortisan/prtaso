@@ -15,7 +15,7 @@ public class ResponseUtil {
         return javax.ws.rs.core.Response.ok(obj, MediaType.APPLICATION_JSON).build();
     }
 
-    public static Response unautorized() {
+    public static Response unauthorized() {
         return javax.ws.rs.core.Response.status(UNAUTHORIZED).build();
     }
 

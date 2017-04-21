@@ -1,4 +1,4 @@
-package br.com.ortiz.xml.adapters;
+package br.com.ortiz.xml.adapter;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.Instant;

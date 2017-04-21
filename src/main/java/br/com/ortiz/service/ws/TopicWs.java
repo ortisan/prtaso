@@ -1,11 +1,9 @@
 package br.com.ortiz.service.ws;
 
-import br.com.ortiz.annotations.Secured;
-import br.com.ortiz.business.ejb.TopicService;
+import br.com.ortiz.service.ejb.TopicService;
 import br.com.ortiz.domain.entity.Topic;
-import br.com.ortiz.domain.entity.User;
+import br.com.ortiz.security.annotation.Secured;
 import br.com.ortiz.service.ws.util.ResponseUtil;
-import br.com.ortiz.to.SignResultTo;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

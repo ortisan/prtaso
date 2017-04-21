@@ -1,11 +1,10 @@
 package br.com.ortiz.domain.entity;
 
-import br.com.ortiz.xml.adapters.LocalDateTimeAdapter;
+import br.com.ortiz.xml.adapter.LocalDateTimeAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**

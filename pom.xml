@@ -103,6 +103,13 @@
             <version>9.4.2.v20170220</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>4.0.6</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -141,6 +148,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.2.v20170220</version>
             </plugin>
+
+            
         </plugins>
     </build>
 </project>
