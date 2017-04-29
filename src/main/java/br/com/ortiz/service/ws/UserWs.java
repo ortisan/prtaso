@@ -42,14 +42,7 @@ public class UserWs {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
     public UserToken save(User user) throws UnsupportedEncodingException {
-        userService.save(user);
-        String token = userService.createToken(user);
-        UserToken userToken = new UserToken();
-        userToken.setId(user.getId());
-        userToken.setName(user.getName());
-        userToken.setUsername(user.getUsername());
-        userToken.setToken(token);
-        return userToken;
+        return userService.saveAndCreateToken(user);
     }
 
 }

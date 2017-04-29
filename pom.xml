@@ -148,8 +148,6 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.2.v20170220</version>
             </plugin>
-
-            
         </plugins>
     </build>
 </project>

@@ -22,6 +22,14 @@ public class TwitterRequestToken {
     @Column(name = "token_secret")
     private String tokenSecret;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getRequestToken() {
         return requestToken;
     }
