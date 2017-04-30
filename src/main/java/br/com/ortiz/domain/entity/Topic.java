@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @Table(name = "topic")
 public class Topic {
     @SequenceGenerator(
-            name = "topic_sequence_generator",
-            sequenceName = "topic_seq"
+    name = "topic_sequence_generator",
+    sequenceName = "topic_seq", allocationSize = 1
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "topic_sequence_generator")

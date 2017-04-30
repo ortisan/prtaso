@@ -50,7 +50,6 @@ public class UserService {
         return JwtUtil.getUserIdFromToken(token).map((Long userId) -> userDao.find(userId)).orElse(Optional.empty());
     }
 
-    @Transactional(Transactional.TxType.REQUIRES_NEW)
     public TwitterRequestToken saveTwitterRequestRequestToken(RequestToken requestToken) {
         Optional<TwitterRequestToken> requestTokenOptional = twitterRequestTokenDao.findByRequestToken(requestToken.getToken());
         if (requestTokenOptional.isPresent())
@@ -81,6 +80,8 @@ public class UserService {
             String token = JwtUtil.getTokenFromUser(u);
             SignResultTo signResult = new SignResultTo();
             signResult.setUserId(u.getId());
+            signResult.setName(u.getName());
+            signResult.setUsername(u.getUsername());
             signResult.setToken(token);
             return Optional.of(signResult);
         }).orElse(Optional.empty());
@@ -90,12 +91,14 @@ public class UserService {
         return findByToken(token).map((User u) -> {
             final SignResultTo signResult = new SignResultTo();
             signResult.setUserId(u.getId());
+            signResult.setName(u.getName());
+            signResult.setUsername(u.getUsername());
             signResult.setToken(token);
             return Optional.of(signResult);
         }).orElse(Optional.empty());
     }
 
-    @Transactional(Transactional.TxType.REQUIRES_NEW)
+
     public SignResultTo saveAndSignin(AccessToken accessToken) {
         Long twitterUserId = accessToken.getUserId();
         Optional<User> userOpt = findByUserByTwitterUserId(twitterUserId);
@@ -112,19 +115,19 @@ public class UserService {
         String token = JwtUtil.getTokenFromUser(user);
         SignResultTo signResult = new SignResultTo();
         signResult.setUserId(user.getId());
+        signResult.setName(user.getName());
+        signResult.setUsername(user.getUsername());
         signResult.setToken(token);
 
         return signResult;
     }
-
 
     public Optional<TwitterRequestToken> getTwitterRequestTokenByToken(String requestToken) {
         return twitterRequestTokenDao.findByRequestToken(requestToken);
     }
 
     public Optional<User> findByUserByTwitterUserId(Long twitterUserId) {
-        Optional<User> user = userDao.findByTwitterUserId(twitterUserId);
-        return user;
+        return userDao.findByTwitterUserId(twitterUserId);
     }
 
 }

@@ -29,7 +29,7 @@ public class SigninWs {
     }
 
     @Path("/{token}")
-    @POST
+    @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
     public Response loginWithToken(@PathParam("token") String token) throws UnsupportedEncodingException {

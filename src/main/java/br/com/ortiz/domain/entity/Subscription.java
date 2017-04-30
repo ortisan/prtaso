@@ -11,7 +11,7 @@ import java.util.List;
 public class Subscription {
     @SequenceGenerator(
     name = "subscription_sequence_generator",
-    sequenceName = "subscription_seq"
+    sequenceName = "subscription_seq", allocationSize = 1
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subscription_sequence_generator")

@@ -26,7 +26,7 @@ import java.util.Optional;
 public class TwitterWs {
     // TODO CHANGE TO PRODUCTION
     private static final String CALLBACK_BACKEND_URL = "http://localhost:8080/prtaso/api/twitter/callback";
-    private static final String CALLBACK_CLIENT_URL = "http://localhost:3000/twitter/callback/%s";
+    private static final String CALLBACK_CLIENT_URL = "http://localhost:3000/twitter/callback?token=%s";
 
     @Inject
     private UserService userService;

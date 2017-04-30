@@ -13,7 +13,7 @@ public class User {
 
     @SequenceGenerator(
     name = "user_sequence_generator",
-    sequenceName = "user_seq"
+    sequenceName = "user_seq", allocationSize = 1
     )
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence_generator")

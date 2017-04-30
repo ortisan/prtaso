@@ -8,10 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "twitter_request_token")
 public class TwitterRequestToken {
-    @SequenceGenerator(
-    name = "twitter_request_token_sequence_generator",
-    sequenceName = "twitter_request_token_seq"
-    )
+    @SequenceGenerator(name = "twitter_request_token_sequence_generator",
+    sequenceName = "twitter_request_token_seq", allocationSize = 1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "twitter_request_token_sequence_generator")
     private Long id;
