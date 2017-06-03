@@ -1,14 +1,15 @@
 package br.com.ortiz.service.ws;
 
-import br.com.ortiz.service.ejb.TopicService;
 import br.com.ortiz.domain.entity.Topic;
 import br.com.ortiz.security.annotation.Secured;
+import br.com.ortiz.service.ejb.TopicService;
 import br.com.ortiz.service.ws.util.ResponseUtil;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,7 @@ public class TopicWs {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
     public Topic save(Topic topic) {
+        topic.setCreationDate(LocalDateTime.now());
         topicService.save(topic);
         return topic;
     }

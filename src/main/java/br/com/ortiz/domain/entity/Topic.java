@@ -1,11 +1,14 @@
 package br.com.ortiz.domain.entity;
 
 import br.com.ortiz.xml.adapter.LocalDateTimeAdapter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by marcelo on 09/02/17.
@@ -14,6 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "topic")
 public class Topic {
+
     @SequenceGenerator(
     name = "topic_sequence_generator",
     sequenceName = "topic_seq", allocationSize = 1
@@ -26,11 +30,15 @@ public class Topic {
 
     private String message;
 
+    @Column(name = "creation_date")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime creationDate;
 
+    @Column(name = "send_date")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime sendDate;
+
+    private Boolean sended;
 
     public Long getId() {
         return id;
@@ -70,5 +78,13 @@ public class Topic {
 
     public void setSendDate(LocalDateTime sendDate) {
         this.sendDate = sendDate;
+    }
+
+    public Boolean getSended() {
+        return sended;
+    }
+
+    public void setSended(Boolean sended) {
+        this.sended = sended;
     }
 }

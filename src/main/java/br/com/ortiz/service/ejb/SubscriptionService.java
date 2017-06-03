@@ -8,6 +8,7 @@ import br.com.ortiz.to.SubscriptionTo;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by tenta on 15/03/2017.
@@ -32,4 +33,9 @@ public class SubscriptionService {
         subscription.setTopic(topic);
         return subscriptionDao.save(subscription);
     }
+
+    public List<Subscription> getSubscriptionNotSended() {
+        return subscriptionDao.getSubscriptionNotSended();
+    }
+
 }

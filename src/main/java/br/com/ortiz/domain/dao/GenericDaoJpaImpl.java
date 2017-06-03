@@ -41,8 +41,7 @@ implements GenericDao<T, PK> {
     }
 
     public List<T> findAll() {
-        return entityManager
-        .createQuery(String.format("Select obj from %s obj", entityClass.getSimpleName()), entityClass)
+        return entityManager.createQuery(String.format("Select obj from %s obj", entityClass.getSimpleName()), entityClass)
         .getResultList();
     }
 

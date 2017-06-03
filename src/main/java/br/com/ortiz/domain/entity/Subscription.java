@@ -24,6 +24,8 @@ public class Subscription {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    private Boolean sended;
+
     public Long getId() {
         return id;
     }
@@ -46,5 +48,13 @@ public class Subscription {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getSended() {
+        return sended;
+    }
+
+    public void setSended(Boolean sended) {
+        this.sended = sended;
     }
 }
